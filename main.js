@@ -50,7 +50,7 @@ function startGame() {
     bottomspace = win_height - header_height - size*10;
     printmoai(parent, startX, startY, size); // 右下から画像を敷き詰める
 
-    // document.addEventListener(EVENTNAME_TOUCHSTART, touchStartEvent);
+    document.addEventListener(EVENTNAME_TOUCHSTART, touchStartEvent);
     document.addEventListener(EVENTNAME_TOUCHMOVE, moveEvent);
 }
 
@@ -73,9 +73,18 @@ function printmoai(parent, startX, startY, size) {
     }
 }
 
+function touchStartEvent(e) {
+    let x = e.touches[0].pageX;
+    let y = e.touches[0].pageY;
+    changeImage(x, y);
+}
 function moveEvent(e) {
     let x = e.touches[0].pageX;
     let y = e.touches[0].pageY;
+    changeImage(x, y);
+}
+
+function changeImage(x, y) {
     let OnesPrace = Math.floor(( (win_width - x) - rightspace )/size) + 1;
     let TensPrace = Math.floor(( (win_height- y) - bottomspace )/size);
     if ((OnesPrace > 0 && OnesPrace <= 10) && (TensPrace >= 0 && TensPrace < 8)) {
