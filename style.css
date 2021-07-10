@@ -22,15 +22,6 @@ html,body,main {
 .parent {
     width: 100%;
     height: calc(100% - 50px);
-    display: flex;
-}
-.player1 {
-    flex-grow: 1;
-    background-color: #ffafaf;
-}
-.player2 {
-    flex-grow: 1;
-    background-color: #afe8ff;
 }
 
 .image {
