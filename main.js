@@ -4,6 +4,7 @@ let rightspace;
 let bottomspace;
 let size;
 let nowTargetId = null; // 現在選択してるもののid
+let nowLife = 8000;
 
 let supportTouch = 'ontouchend' in document; // タッチイベントが利用可能かの判別
 
@@ -73,11 +74,14 @@ function printmoai(parent, startX, startY, size) {
     }
 }
 
+// 画面タッチ時
 function touchStartEvent(e) {
     let x = e.touches[0].pageX;
     let y = e.touches[0].pageY;
     changeImage(x, y);
 }
+
+// 画面スワイプ時
 function moveEvent(e) {
     let x = e.touches[0].pageX;
     let y = e.touches[0].pageY;
@@ -91,13 +95,27 @@ function changeImage(x, y) {
         // console.log(OnesPrace+TensPrace*10);
         let idNum = OnesPrace+TensPrace*10;
         if (idNum != nowTargetId) {
-            document.getElementById(idNum).style.opacity = document.getElementById(idNum).style.opacity<0.5 ? 1.0 : 0.2;   
+            let changedOpacity = document.getElementById(idNum).style.opacity<0.5 ? 1.0 : 0.2; // 変化後の色
+            if (changedOpacity > 0.5) {
+                for (let i = idNum; i >= 1; i--) {
+                    document.getElementById(i).style.opacity = changedOpacity;
+                }
+                nowLife = idNum*100;
+            }else{
+                for (let i = idNum; i <= 80; i++) {
+                    document.getElementById(i).style.opacity = changedOpacity;
+                }
+                nowLife = (idNum-1)*100;
+            }
+            document.querySelector(".player1").innerHTML = nowLife;
         }
         nowTargetId = idNum;
     }else{
         nowTargetId = null;
     }
+    // console.log(nowLife);
 }
 
 window.addEventListener('resize', startGame);
 window.addEventListener("load", startGame);
+document.addEventListener("dblclick", function(e){ e.preventDefault();}, { passive: false });
