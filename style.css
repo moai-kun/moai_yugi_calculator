@@ -10,12 +10,31 @@ html,body,main {
     width: 100%;
     display: flex;
 }
-.header-left, .header-right{
+.header-left {
     flex-grow: 1;
     text-align: center;
+    background-color: #e8748b;
+}
+.header-right{
+    flex-grow: 1;
+    text-align: center;
+    background-color: #74c5e8;
 }
 .header-left p, .header-right p{
     display: inline-block;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.calculate {
+    background-color: #74e897;
+    width: 100px;
+}
+.calculate p{
+    text-align: center;
+    font-size: 2em;
+    margin: 0;
 }
 
 
